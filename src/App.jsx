@@ -4,7 +4,14 @@ function App() {
   const [activeKey, setActiveKey] = useState("");
   useEffect(() => {
     document.addEventListener("keydown", (e) => {
-      playSound(e.key.toUpperCase());
+      const keys = ["Q", "W", "E", "A", "S", "D", "Z", "X", "C"];
+      const key = e.key.toUpperCase();
+      if (!keys.includes(key)) return;
+      const drumPadAudio = document.getElementById(key);
+      const drumPadContainer = drumPadAudio.parentNode;
+      let src = drumPadContainer.id;
+      playSound(key);
+      toggleDrumPadStyle(src);
     });
   }, []);
 
@@ -62,6 +69,16 @@ function App() {
     setActiveKey(selector);
   }
 
+  function toggleDrumPadStyle(key) {
+    const drumPadsElements = document.querySelectorAll(".drum-pad");
+    drumPadsElements.forEach((pad) => pad.classList.remove("active"));
+
+    const drumPadElement = document.getElementById(key);
+    if (drumPadElement) {
+      drumPadElement.classList.add("active");
+    }
+  }
+
   return (
     <div className="App">
       <div className="drum-machine">
@@ -71,6 +88,7 @@ function App() {
             <div
               onClick={() => {
                 playSound(drumPad.text);
+                toggleDrumPadStyle(drumPad.src);
               }}
               className="drum-pad"
               id={drumPad.src}

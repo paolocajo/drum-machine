@@ -1,3 +1,6 @@
+html {
+  font-family: Verdana, Geneva, Tahoma, sans-serifa;
+}
 .App {
   display: flex;
   justify-content: center;
@@ -11,9 +14,11 @@
 #display {
   position: absolute;
   text-align: center;
-  top: -3vh;
+  top: -5vh;
   width: 100%;
-  background-color: rgb(208, 208, 208);
+  padding: 5px 0;
+  font-size: large;
+  font-weight: bold;
 }
 
 .drum-pads {
@@ -27,4 +32,11 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  transition: background-color 0.2s ease;
+}
+.drum-pad.active {
+  /* Estilos cuando el botón está activo (pulsado) */
+  box-shadow: inset 0px 0px 10px rgba(117, 115, 114, 0.9); /* Efecto de sombra interna */
+  transform: scale(0.95);
+  transition: box-shadow 0.1s ease, transform 0.1s ease;
 }
